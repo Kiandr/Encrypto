@@ -1,0 +1,11 @@
+Path: build
+URL: http://naatlsvn01.gs.adinternal.com/svn/PR/trunk/cryptopp
+Repository Root: http://naatlsvn01.gs.adinternal.com/svn/PR
+Repository UUID: 76a18375-acc8-5348-98ae-03075ebea0fe
+Revision: 4527
+Node Kind: directory
+Schedule: normal
+Last Changed Author: madsent
+Last Changed Rev: 4527
+Last Changed Date: 2015-12-29 16:25:54 -0500 (Tue, 29 Dec 2015)
+
