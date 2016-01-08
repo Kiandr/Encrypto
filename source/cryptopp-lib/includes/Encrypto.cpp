@@ -51,6 +51,7 @@ using CryptoPP::Base64URLDecoder;
 
 #include "pch.h"
 
+
 string UriEncode(const string & sSrc)
 {
    const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
@@ -80,102 +81,23 @@ string UriEncode(const string & sSrc)
 
 
 
+void Initialize(){
+
+    string cipher, encoded, recovered;
+
+    unsigned char key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+    
+    std::cout<<"The Key is->"<<key<< endl;;
+
+};
+
+
+
+
 int main(int argc, char* argv[])
 {
-AutoSeededRandomPool prng;
-
-
-	// Filling with actual key
-	//string plain = "businessPartnerId=3;sourceCompanyCode=3;sourceProduct=Sage300;fein=3;ts=2015-12-21T19:59:06.812Z;ec=50;companyName=3;address1=3;address2=3;city=3;state=AK;zip=3;";
-	 string plain = "businessPartnerId=22;sourceCompanyCode=22;sourceProduct=Sage100;fein=22;ts=2016-12-24T00:36:35.284Z;ec=0;";	
-//string plain = "TestMeThisIsAGoodNews";
-string cipher, encoded, recovered;
-	unsigned char key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,
-53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
-
-	// Pretty print key
-	std::cout<<"The Key is->"<<key<< endl;;
-	/*********************************\
-	\*********************************/
-
-try
-{
-    cout << "plain text: " << plain << endl;
-
-    ECB_Mode< AES >::Encryption e;
-    e.SetKey( key, sizeof(key) );
-
-    // The StreamTransformationFilter adds padding
-    //  as required. ECB and CBC Mode must be padded
-    //  to the block size of the cipher.
-    StringSource ss1( plain, true, 
-        new StreamTransformationFilter( e,
-            new StringSink( cipher ),
-			StreamTransformationFilter::PKCS_PADDING
-        ) // StreamTransformationFilter      
-    ); // StringSource
-}
-catch( CryptoPP::Exception& e )
-	{
-    cerr << e.what() << endl;
-    exit(1);
-	}
-
-/*********************************\
-\*********************************/
-
-// Pretty print cipher text
-StringSource ss2( cipher, true,
-    new Base64Encoder(
-        new StringSink( encoded )
-    ) // HexEncoder // Base64Encoder
-); // StringSource
-cout << "cipher text: " << encoded << endl;
-
-/********************Base64URLEncoder*************\
-\*********************Base64Decoder************/
-string url;
-string urlEn =    encoded;
-string HttpUrl;
-StringSource ss(urlEn, true,
-    new Base64URLEncoder(
-        new StringSink(url)
-    ) // Base64URLDecoder
-); // StringSource
- 
-
-HttpUrl = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage100/?key="+url;
-
-/********************Base64URLEncoder*************\
-\*********************Base64Decoder************/
-urlEn = UriEncode(encoded);
-HttpUrl = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage100/?key="+urlEn;
-
-/*********************************\
-\*********************************/
-// Decrypt
-try
-{
-    ECB_Mode< AES >::Decryption d;
-    // ECB Mode does not use an IV
-    d.SetKey( key, sizeof(key) );
-
-    // The StreamTransformationFilter removes
-    //  padding as required.
-    StringSource ss3( cipher, true, 
-        new StreamTransformationFilter( d,
-            new StringSink( recovered )
-        ) // StreamTransformationFilter
-    ); // StringSource
-
-    cout << "recovered text: " << recovered << endl;
-}
-catch( CryptoPP::Exception& e )
-{
-    cerr << e.what() << endl;
-    exit(1);
-}
-
+    AutoSeededRandomPool prng;
+    Initialize();
 
 
 	return 0;
