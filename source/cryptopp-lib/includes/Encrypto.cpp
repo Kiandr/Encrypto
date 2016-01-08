@@ -1,97 +1,55 @@
+#include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
 
-
-// g++ -g3 -ggdb -O0 -DDEBUG -I/usr/include/cryptopp Driver.cpp -o Driver.exe -lcryptopp -lpthread
-// g++ -g -O2 -DNDEBUG -I/usr/include/cryptopp Driver.cpp -o Driver.exe -lcryptopp -lpthread
 #include <windows.h>
 #include <cstdio>
-#include <iostream>
 
-using std::cout;
-using std::cerr;
-using std::endl;
-#include "..\cryptopp560\osrng.h"
-using CryptoPP::AutoSeededRandomPool;
 #include <cstdlib>
 using std::exit;
-#include "..\cryptopp560\modes.h"
-#include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
 
 #include <string>
 using std::string;
 
-#include <cstdlib>
-using std::exit;
+#include "osrng.h"
+using CryptoPP::AutoSeededRandomPool;
 
-#include "..\cryptopp560\cryptlib.h"
+#include "cryptlib.h"
 using CryptoPP::Exception;
 
-#include "..\cryptopp560\hex.h"
+#include "hex.h"
 using CryptoPP::HexEncoder;
 using CryptoPP::HexDecoder;
 
-#include "..\cryptopp560\filters.h"
+#include "filters.h"
 using CryptoPP::StringSink;
 using CryptoPP::StringSource;
 using CryptoPP::StreamTransformationFilter;
 
-#include "..\cryptopp560\des.h"
+#include "des.h"
 using CryptoPP::DES_EDE2;
 
-#include "..\cryptopp560\modes.h"
+#include "modes.h"
 using CryptoPP::CBC_Mode;
-
-#include "..\cryptopp560\secblock.h"
-using CryptoPP::SecByteBlock;
-#include <iostream>
-#include <string>
-#include "..\cryptopp560\modes.h"
-#include "..\cryptopp560\aes.h"
-#include"..\cryptopp560\filters.h"
-
-
-#include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
-
-#include <string>
-using std::string;
-
-#include <cstdlib>
-using std::exit;
-
-#include "..\cryptopp560\cryptlib.h"
-using CryptoPP::Exception;
-
-#include "..\cryptopp560\hex.h"
-using CryptoPP::HexEncoder;
-using CryptoPP::HexDecoder;
-//using CryptoPP::Base64Encoder;
-#include "..\cryptopp560\filters.h"
-using CryptoPP::StringSink;
-using CryptoPP::StringSource;
-using CryptoPP::StreamTransformationFilter;
-
-#include "..\cryptopp560\aes.h"
-using CryptoPP::AES;
-
-#include "..\cryptopp560\modes.h"
 using CryptoPP::ECB_Mode;
 
-#include "..\\cryptopp560\base64.h"
-using CryptoPP::SimpleProxyFilter;
-using CryptoPP::Base64Encoder;
 
-#include "..\\cryptopp560\base64.h"
+#include "secblock.h"
+using CryptoPP::SecByteBlock;
+
+
+#include "aes.h"
+using CryptoPP::AES;
+
+#include "base64.h"
 using CryptoPP::SimpleProxyFilter;
 using CryptoPP::Base64Encoder;
 using CryptoPP::Base64Decoder;
 using CryptoPP::Base64URLEncoder;
 using CryptoPP::Base64URLDecoder;
-#include "..\\cryptopp560\pch.h"
+
+#include "pch.h"
 
 string UriEncode(const string & sSrc)
 {
