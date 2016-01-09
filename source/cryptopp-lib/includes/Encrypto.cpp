@@ -80,25 +80,20 @@ string UriEncode(const string & sSrc)
 }
 
 
-
-void Initialize(){
-
-    string cipher, encoded, recovered;
-
-    unsigned char key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
-    
-    std::cout<<"The Key is->"<<key<< endl;;
-
-};
-
-
-
-
 int main(int argc, char* argv[])
 {
     AutoSeededRandomPool prng;
-    Initialize();
 
+    string cipher, encoded, recovered;
+    string plain = "businessPartnerId=22;sourceCompanyCode=22;sourceProduct=Sage100;fein=22;ts=2016-12-24T00:36:35.284Z;ec=0;";
+    unsigned char key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+    std::cout<<"The Key is->"<<key<< endl;;
+
+    // Build Aes
+    cout << "plain text: " << plain << endl;
+    ECB_Mode< AES >::Encryption e;
+//    e.SetKey( key, sizeof(key));
+//    StringSource ss1(plain, true,new StreamTransformationFilter( e,new StringSink( cipher ), StreamTransformationFilter::PKCS_PADDING));
 
 	return 0;
 }
