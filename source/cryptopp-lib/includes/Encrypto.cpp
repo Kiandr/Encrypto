@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     // Build Aes
     cout << "plain text: " << plain << endl;
     ECB_Mode< AES >::Encryption e;
-//    e.SetKey( key, sizeof(key));
+    e.SetKey( key, sizeof(key));
 //    StringSource ss1(plain, true,new StreamTransformationFilter( e,new StringSink( cipher ), StreamTransformationFilter::PKCS_PADDING));
 
 	return 0;
