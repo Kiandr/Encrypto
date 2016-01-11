@@ -1,0 +1,97 @@
+Index: prddfun.mak
+===================================================================
+--- prddfun.mak	(revision 4560)
++++ prddfun.mak	(working copy)
+@@ -12,7 +12,7 @@
+ 
+ iPRDDFUN: $(INCPATH)\prddfun.i $(INCPATH)\prddfun.h $(GENPATH)\prddfun.dep
+ 
+-$(RUNPATH)\$(APP)DDFUN.DLL: $(OBJPATH)\$(APP)ddfun.obj $(OBJPATH)\$(APP)ddfun1.obj
++$(RUNPATH)\$(APP)DDFUN.DLL: $(OBJPATH)\$(APP)ddfun.obj $(OBJPATH)\$(APP)ddfun1.obj $(OBJPATH)\$(APP)ddfun-crypto.obj ..\..\cryptopp-lib\libs\cryptlib.lib
+ 
+ $(OBJPATH)\$(APP)ddfun.OBJ: $(OBJPATH)\PRDDFUN.OBJ
+    copy $? $@
+@@ -20,10 +20,18 @@
+ $(OBJPATH)\$(APP)ddfun1.OBJ: $(OBJPATH)\PRDDFUN1.OBJ
+    copy $? $@
+ 
++$(OBJPATH)\$(APP)ddfun-crypto.OBJ: $(OBJPATH)\PRDDFUN-CRYPTO.OBJ
++   copy $? $@
++
++
+ $(OBJPATH)\prddfun.obj: prddfun.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
+ 
+-$(OBJPATH)\prddfun1.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h prddfungenxml.cpp
++$(OBJPATH)\prddfungenxml.obj: prddfungenxml.cpp
+ 
++$(OBJPATH)\prddfun1.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
++
++$(OBJPATH)\prddfun-crypto.obj: prddfun-crypto.cpp iPR iPRDDFUN prddfun1.h prddfun2.h 
++
+ # If there is a prddfun2 table add table generation dependencies here based
+ # on the .tbl files
+ $(GENPATH)\prddfun.dep: prddfun.tbl
+Index: prddfun.mak
+===================================================================
+--- prddfun.mak	(revision 4560)
++++ prddfun.mak	(working copy)
+@@ -12,7 +12,7 @@
+ 
+ iPRDDFUN: $(INCPATH)\prddfun.i $(INCPATH)\prddfun.h $(GENPATH)\prddfun.dep
+ 
+-$(RUNPATH)\$(APP)DDFUN.DLL: $(OBJPATH)\$(APP)ddfun.obj $(OBJPATH)\$(APP)ddfun1.obj
++$(RUNPATH)\$(APP)DDFUN.DLL: $(OBJPATH)\$(APP)ddfun.obj $(OBJPATH)\$(APP)ddfun1.obj $(OBJPATH)\$(APP)ddfun-crypto.obj ..\..\cryptopp-lib\libs\cryptlib.lib
+ 
+ $(OBJPATH)\$(APP)ddfun.OBJ: $(OBJPATH)\PRDDFUN.OBJ
+    copy $? $@
+@@ -20,10 +20,18 @@
+ $(OBJPATH)\$(APP)ddfun1.OBJ: $(OBJPATH)\PRDDFUN1.OBJ
+    copy $? $@
+ 
++$(OBJPATH)\$(APP)ddfun-crypto.OBJ: $(OBJPATH)\PRDDFUN-CRYPTO.OBJ
++   copy $? $@
++
++
+ $(OBJPATH)\prddfun.obj: prddfun.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
+ 
+-$(OBJPATH)\prddfun1.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h prddfungenxml.cpp
++$(OBJPATH)\prddfungenxml.obj: prddfungenxml.cpp
+ 
++$(OBJPATH)\prddfun1.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
++
++$(OBJPATH)\prddfun-crypto.obj: prddfun-crypto.cpp iPR iPRDDFUN prddfun1.h prddfun2.h 
++
+ # If there is a prddfun2 table add table generation dependencies here based
+ # on the .tbl files
+ $(GENPATH)\prddfun.dep: prddfun.tbl
+Index: prddfun1.cpp
+===================================================================
+--- prddfun1.cpp	(revision 4560)
++++ prddfun1.cpp	(working copy)
+@@ -10,7 +10,7 @@
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ // The following files are suitable candidates for precompiled headers
+-
++#include "Integer.h"
+ #include <plusapi.h>
+ #include <stdarg.h>
+ #include <stdio.h>
+@@ -842,6 +842,8 @@
+    tm *lt = localtime(&now);
+    CHAR sDate[50];
+ 
++   // This is the Crypto Integer data type
++   CryptoPP::Integer i;
+  switch ( lField ) {
+     case PRDDFUN_IDX(URL):
+     // Function to retrive active Employee
+@@ -870,7 +872,7 @@
+       // current date/time based on current system
+       sprintf_s(sDate, "%d-%d-%dT%d:%d:%d.000Z", (1900 + lt->tm_year), lt->tm_mon, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec,lt->tm_sec);
+       sprintf_s(_url, "%s/businessPartnerId=%s;sourceCompanyCode=%s;sourceProduct=Sage300;fein=%s;ts=%s;ec=%ld;companyName=%s;address1=%s;address2=%s;city=%s;state=%s;zip=%s;",
+-         lpv->stemURLapply, lpv->sClientID, sOrgID, sFein, sDate, lCount, sName, sAddress1, sAddress2, sCity, sState, sPostCode);
++      lpv->stemURLapply, lpv->sClientID, sOrgID, sFein, sDate, lCount, sName, sAddress1, sAddress2, sCity, sState, sPostCode);
+ 
+     // Filling url buffer
+     strCopyBZ(lpr->url, nSize, _url);
