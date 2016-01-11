@@ -1,0 +1,4 @@
+what is the difference between the Mt and Md files? 
+MT or MTd static linking runtime, No action required. 
+MD or MDt Dynamic Runtime Linking, Rebuild Crpto++ Library. 
+
