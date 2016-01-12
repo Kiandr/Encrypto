@@ -50,7 +50,7 @@ using CryptoPP::Base64URLEncoder;
 using CryptoPP::Base64URLDecoder;
 
 #include "pch.h"
-
+#include "integer.h"
 
 string UriEncode(const string & sSrc)
 {
@@ -91,8 +91,9 @@ int main(int argc, char* argv[])
 
     // Build Aes
     cout << "plain text: " << plain << endl;
-    ECB_Mode< AES >::Encryption e;
-    e.SetKey( key, sizeof(key));
+	Cryptopp::Integer i;
+  //  ECB_Mode< AES >::Encryption e;
+  //  e.SetKey( key, sizeof(key));
 //    StringSource ss1(plain, true,new StreamTransformationFilter( e,new StringSink( cipher ), StreamTransformationFilter::PKCS_PADDING));
 
 	return 0;
