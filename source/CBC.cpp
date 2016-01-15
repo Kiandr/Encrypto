@@ -131,7 +131,8 @@ AutoSeededRandomPool prng;
 	//string plain = "businessPartnerId=3;sourceCompanyCode=3;sourceProduct=Sage300;fein=3;ts=2015-12-21T19:59:06.812Z;ec=50;companyName=3;address1=3;address2=3;city=3;state=AK;zip=3;";
 	 string plain = "businessPartnerId=22;sourceCompanyCode=22;sourceProduct=Sage100;fein=22;ts=2016-12-24T00:36:35.284Z;ec=0;";	
 //string plain = "TestMeThisIsAGoodNews";
-string cipher, encoded, recovered;
+string cipher = "01234567891234560123456789123456";
+string = encoded, recovered;
 	unsigned char key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,
 53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
 
