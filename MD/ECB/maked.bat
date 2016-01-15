@@ -1,0 +1,3 @@
+
+cl /LD  mylib.c 
+
