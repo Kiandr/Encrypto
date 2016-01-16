@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="C:\GitHub\MD\CBC\cryptopp560\Win32\Output\Debug\cryptlib.lib"
+				AdditionalDependencies="C:\GitHub\Encrypto\MD\CBC\cryptopp560\Win32\Output\Debug\cryptlib.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
