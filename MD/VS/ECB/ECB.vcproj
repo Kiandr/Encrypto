@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="ECB"
+	Name="mylib"
 	ProjectGUID="{76742B1D-D482-45A6-A133-EB720FB50990}"
 	RootNamespace="ECB"
 	Keyword="Win32Proj"

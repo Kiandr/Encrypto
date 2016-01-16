@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
- __declspec(dllexport) int  helloworld(char *T);
+ __declspec(dllexport) char  *CryptoEncrypt(char *_url);
 
 #ifdef __cplusplus
 }

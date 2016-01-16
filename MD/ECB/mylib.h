@@ -1,18 +1,17 @@
 #ifndef MYLIB_H
 #define MYLIB_H
 
-#ifdef CRYPTODLL_EXPORT
-#define CRYPTODLL_API __declspec(dllexport) 
+#if defined(BUILDING_MYLIB)
+#define MYLIB_API __declspec(dllexport) __stdcall
 #else
-#define CRYPTODLL_API __declspec(dllimport) 
+#define MYLIB_API __declspec(dllimport) __stdcall
 #endif
-
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void  helloworld(char *T);
+ __declspec(dllexport) int  helloworld(char *T);
 
 #ifdef __cplusplus
 }
