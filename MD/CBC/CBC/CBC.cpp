@@ -17,7 +17,8 @@ using std::exit;
 using std::cout;
 using std::cerr;
 using std::endl;
-
+#include <fstream>
+using  std::ofstream;
 //:::::::: Crypto ++ Libs ::://
 #include "..\cryptopp560\osrng.h"
 using CryptoPP::AutoSeededRandomPool;
@@ -173,7 +174,7 @@ int main(){
 	//strcpy_s(_unEncryptedUrl, _urlLen, _url);
 	
 	//AutoSeededRandomPool prng;
-	char _url[] = "businessPartnerId=1234;sourceCompanyCode=123;sourceProduct=Sage300;fein=123;ts=2016-01-17T00:21:52.252Z;ec=50;companyName=kian;address1=kian;address2=kian;city=kian;state=AK;zip=Kian;";	
+	char _url[] = "businessPartnerId=1234;sourceCompanyCode=123;sourceProduct=Sage300;fein=123;ts=2016-01-18T00:21:52.252Z;ec=50;companyName=kian;address1=kian;address2=kian;city=kian;state=AK;zip=Kian;";	
 	int _urlLen = sizeof(_url);
 	string plain(_url,_urlLen);
 	//string plain = "businessPartnerId=123;sourceCompanyCode=123;sourceProduct=Sage300;fein=123;ts=2016-01-14T00:21:52.252Z;ec=50;companyName=kian;address1=kian;address2=kian;city=kian;state=AK;zip=Kian;";	
@@ -233,6 +234,12 @@ StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSOb
 	);
 
 Sage300prefix = Sage300prefix+urlEncode(encoded);
+
+ ofstream myfile;
+ myfile.open ("C:\GitHub\Encrypto\MD\VS_Tester_DllEEB\EncryptedOriginal.txt");
+myfile << Sage300prefix;
+
+
 
 return 0;
 
