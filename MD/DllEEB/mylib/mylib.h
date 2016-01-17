@@ -11,6 +11,7 @@
 extern "C" {
 #endif
  __declspec(dllexport)  void Hello(char *buffer);
+ __declspec(dllexport)  void CryptoEncryptTestUnit(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl, int Index);
  __declspec(dllexport)  char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl);
 
 
