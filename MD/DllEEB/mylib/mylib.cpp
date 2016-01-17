@@ -374,7 +374,7 @@ switch (Index){
 		case 4: 
 	{
 	myfile.open ("myLog.txt");
-	myfile << "-----------  BeginTestCase3: Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address ----------\n";
+	myfile << "-----------  BeginTestCase4: Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address ----------\n";
 	
 		myfile << "[_buffer] =";
 	myfile << _buffer;
@@ -515,6 +515,410 @@ switch (Index){
 	myfile.close();
 	break;
 	}
+	
+	
+	
+	
+		case 5: 
+	{
+	myfile.open ("myLog.txt");
+	myfile << "-----------  BeginTestCase5: Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address ----------\n";
+	
+		myfile << "[_buffer] =";
+	myfile << _buffer;
+	myfile << "\n";
+	myfile << "[_LenOfbuffer] = ";
+	myfile << _LenOfbuffer;
+	myfile << "\n";
+	myfile << "[_url]=";
+	myfile << _url;
+	myfile << "\n";
+	myfile << "[_lenOfurl]=";
+	myfile << _lenOfurl;
+	myfile << "\n";
+	
+	
+	
+	string plain(_url,_lenOfurl-1);
+	myfile << "[string plain(_url,_lenOfurl)]=";
+	myfile << plain;
+	myfile << "\n";
+	string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
+	myfile << "[string Sage300prefix)]=\n";
+	myfile << Sage300prefix;
+	myfile << "\n";
+	
+	
+	string cipher = "";
+	string   encoded, recovered;
+	myfile << "[cipher] = ";
+	myfile << cipher;
+	myfile << "\n";
+	myfile << "[encoded] = ";
+	myfile << encoded;
+	myfile << "\n";
+	myfile << "[recovered] = ";
+	myfile << recovered;
+	myfile << "\n";
+	
+	const byte key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+	myfile << "[key] = ";
+	myfile << key;
+	myfile << "\n";
+	
+	size_t myArraySize = sizeof(key);
+	myfile << "[myArraySize] = ";
+	myfile << myArraySize;
+	myfile << "\n";
+	
+	/*************************************************STEP 2 Generate an AES ECB Encryption Key from const bute key[] ** Its a Secret Key that Sage 100 works with***************/
+	
+	encoded.clear();
+	myfile << "[encoded.clear()]=";
+	myfile << encoded;
+	myfile << "\n";
+	
+	ECB_Mode< AES >::Encryption e;
+	e.SetKey(key, myArraySize );
+	
+	myfile << "[ECB_Mode< AES >::Encryption e;]=";
+	//myfile << e.SetKey(key, myArraySize );
+	myfile << "\n";
+	
+	
+	myfile << "[void.void(key, void )]= ";
+	myfile << key;
+	myfile << "\n";
+	
+	myfile << "[void.void(void, myArraySize )]=";
+	myfile << myArraySize;
+	myfile << "\n";
+	
+	/**************************************************STEP 3 Strign Source uses the Plain text and the 'e' and the PKCS padding mechanisim to encrypt **************************/
+	// Build CNC AES Padding Encyption using Crypto++ filters 
+	cipher.clear();
+	myfile << "[cipher.clear();]=";
+	myfile << cipher;
+	myfile << "\n";
+	
+	
+	StringSink *_SSObject = new StringSink( cipher );
+	myfile << "[StringSink *_SSObject = new StringSink( cipher );]=";
+	myfile << _SSObject;
+	myfile << "\n";
+	
+	
+	StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);
+
+	myfile << "[StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);]=";
+	myfile << _STFilter;
+	myfile << "\n";
+	
+
+	// Use encryption and Padding
+    StringSource ss1( plain, true,_STFilter); 
+	
+	
+	myfile << "[StringSource ss1( plain, true,_STFilter); ]=";
+	myfile <<  "IT IS A VOID FUNCTION";
+	myfile << "\n";
+	
+	
+	
+		/**************************************************STEP 4 Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address **********************/
+	// Base64Eecoder	
+	
+	
+		myfile << "[cipher before StringSource ss2 compilation]=";
+	myfile <<  cipher;
+	myfile << "\n";
+	
+	myfile << "[encoded before StringSource ss2 compilation]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+	StringSource ss2( cipher, true,
+		new Base64Encoder(
+			new StringSink( encoded )
+    ) // HexEncoder // Base64Encoder
+	);
+	
+	myfile << "[cipher after StringSource ss2 compilation  ]=";
+	myfile <<  cipher;
+	myfile << "\n";
+	
+	myfile << "[encoded after StringSource ss2 compilation]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+	
+	/**************************************************STEP 5 Add Http Address of Sage 100 server front of the meant **************************************************************/
+
+	
+	myfile << "[Sage300prefix before Sage300prefix+UriEncode(encoded); ]=";
+	myfile <<  Sage300prefix;
+	myfile << "\n";
+	
+	myfile << "[encoded before Sage300prefix+UriEncode(encoded)]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+
+	Sage300prefix = Sage300prefix+UriEncode(encoded);
+
+	
+	myfile << "[Sage300prefix after Sage300prefix+UriEncode(encoded); ]=";
+	myfile <<  Sage300prefix;
+	myfile << "\n";
+	
+	myfile << "[encoded after Sage300prefix+UriEncode(encoded)]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+		
+
+	/**************************************************STEP 6 Filing the buffer peoperly ******************************************************************************************/
+
+	
+	
+	myfile << "\n";
+	myfile <<"---------------------END OF CASE 5------------------------------------------------------------------------\n";
+	myfile.close();
+	break;
+	}
+	
+	
+	
+			case 6: 
+	{
+	myfile.open ("myLog.txt");
+	myfile << "-----------  BeginTestCase5: Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address ----------\n";
+	
+		myfile << "[_buffer] =";
+	myfile << _buffer;
+	myfile << "\n";
+	myfile << "[_LenOfbuffer] = ";
+	myfile << _LenOfbuffer;
+	myfile << "\n";
+	myfile << "[_url]=";
+	myfile << _url;
+	myfile << "\n";
+	myfile << "[_lenOfurl]=";
+	myfile << _lenOfurl;
+	myfile << "\n";
+	
+	
+	
+	string plain(_url,_lenOfurl-1);
+	myfile << "[string plain(_url,_lenOfurl)]=";
+	myfile << plain;
+	myfile << "\n";
+	string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
+	myfile << "[string Sage300prefix)]=\n";
+	myfile << Sage300prefix;
+	myfile << "\n";
+	
+	
+	string cipher = "";
+	string   encoded, recovered;
+	myfile << "[cipher] = ";
+	myfile << cipher;
+	myfile << "\n";
+	myfile << "[encoded] = ";
+	myfile << encoded;
+	myfile << "\n";
+	myfile << "[recovered] = ";
+	myfile << recovered;
+	myfile << "\n";
+	
+	const byte key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+	myfile << "[key] = ";
+	myfile << key;
+	myfile << "\n";
+	
+	size_t myArraySize = sizeof(key);
+	myfile << "[myArraySize] = ";
+	myfile << myArraySize;
+	myfile << "\n";
+	
+	/*************************************************STEP 2 Generate an AES ECB Encryption Key from const bute key[] ** Its a Secret Key that Sage 100 works with***************/
+	
+	encoded.clear();
+	myfile << "[encoded.clear()]=";
+	myfile << encoded;
+	myfile << "\n";
+	
+	ECB_Mode< AES >::Encryption e;
+	e.SetKey(key, myArraySize );
+	
+	myfile << "[ECB_Mode< AES >::Encryption e;]=";
+	//myfile << e.SetKey(key, myArraySize );
+	myfile << "\n";
+	
+	
+	myfile << "[void.void(key, void )]= ";
+	myfile << key;
+	myfile << "\n";
+	
+	myfile << "[void.void(void, myArraySize )]=";
+	myfile << myArraySize;
+	myfile << "\n";
+	
+	/**************************************************STEP 3 Strign Source uses the Plain text and the 'e' and the PKCS padding mechanisim to encrypt **************************/
+	// Build CNC AES Padding Encyption using Crypto++ filters 
+	cipher.clear();
+	myfile << "[cipher.clear();]=";
+	myfile << cipher;
+	myfile << "\n";
+	
+	
+	StringSink *_SSObject = new StringSink( cipher );
+	myfile << "[StringSink *_SSObject = new StringSink( cipher );]=";
+	myfile << _SSObject;
+	myfile << "\n";
+	
+	
+	StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);
+
+	myfile << "[StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);]=";
+	myfile << _STFilter;
+	myfile << "\n";
+	
+
+	// Use encryption and Padding
+    StringSource ss1( plain, true,_STFilter); 
+	
+	
+	myfile << "[StringSource ss1( plain, true,_STFilter); ]=";
+	myfile <<  "IT IS A VOID FUNCTION";
+	myfile << "\n";
+	
+	
+	
+		/**************************************************STEP 4 Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address **********************/
+	// Base64Eecoder	
+	
+	
+		myfile << "[cipher before StringSource ss2 compilation]=";
+	myfile <<  cipher;
+	myfile << "\n";
+	
+	myfile << "[encoded before StringSource ss2 compilation]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+	StringSource ss2( cipher, true,
+		new Base64Encoder(
+			new StringSink( encoded )
+    ) // HexEncoder // Base64Encoder
+	);
+	
+	myfile << "[cipher after StringSource ss2 compilation  ]=";
+	myfile <<  cipher;
+	myfile << "\n";
+	
+	myfile << "[encoded after StringSource ss2 compilation]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+	
+	/**************************************************STEP 5 Add Http Address of Sage 100 server front of the meant **************************************************************/
+
+	
+	myfile << "[Sage300prefix before Sage300prefix+UriEncode(encoded); ]=";
+	myfile <<  Sage300prefix;
+	myfile << "\n";
+	
+	myfile << "[encoded before Sage300prefix+UriEncode(encoded)]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+	
+	
+
+	Sage300prefix = Sage300prefix+UriEncode(encoded);
+
+	
+	myfile << "[Sage300prefix after Sage300prefix+UriEncode(encoded); ]=";
+	myfile <<  Sage300prefix;
+	myfile << "\n";
+	
+	myfile << "[encoded after Sage300prefix+UriEncode(encoded)]=" ;
+	myfile <<  encoded;
+	myfile << "\n";
+		
+
+	/**************************************************STEP 6 Filing the buffer peoperly ******************************************************************************************/
+	
+	myfile << "[buffer befor  memset (_buffer,0,_LenOfbuffer); ]=";
+	myfile <<  _buffer;
+	myfile << "\n";
+	
+	myfile << "[_LenOfbuffer befor  memset (_buffer,0,_LenOfbuffer);]=" ;
+	myfile <<  _LenOfbuffer;
+	myfile << "\n";
+	
+	
+	memset (_buffer,0,_LenOfbuffer);
+	
+	myfile << "[buffer after  memset (_buffer,0,_LenOfbuffer); ]=";
+	myfile <<  _buffer;
+	myfile << "\n";
+	
+	myfile << "[_LenOfbuffer after  memset (_buffer,0,_LenOfbuffer);]=" ;
+	myfile <<  _LenOfbuffer;
+	myfile << "\n";
+	
+	
+	
+	
+	int L = Sage300prefix.length();
+	
+	myfile << "[Sage300prefix.length()]=" ;
+	myfile <<  Sage300prefix.length();
+	myfile << "\n";
+	
+	myfile << "[L]=" ;
+	myfile <<  L;
+	myfile << "\n";
+	
+	
+	
+	myfile << "[size_t length before Sage300prefix.copy(_buffer,L,0 ]=" ;
+	myfile <<  Sage300prefix.length();
+	myfile << "\n";
+	
+	size_t length = Sage300prefix.copy(_buffer,L,0);
+	
+	myfile << "[size_t length after Sage300prefix.copy(_buffer,L,0 ]=" ;
+	myfile <<  Sage300prefix.length();
+	myfile << "\n";
+	
+	
+	
+	myfile << "[ _buffer befor  _buffer[L+1]='\0';]=" ;
+	myfile <<  _buffer;
+	myfile << "\n";
+	
+	_buffer[L+1]='\0';
+	
+	myfile << "[ _buffer after  _buffer[L+1]='\0';]=" ;
+	myfile <<  _buffer;
+	myfile << "\n";
+	
+	/**************************************************STEP 7 Return the address of _buffer to the Dll Tester To Avoid Multi Threading MD C runtime Linking issues********************/
+
+	
+	
+	myfile << "\n";
+	myfile <<"---------------------END OF CASE 6------------------------------------------------------------------------\n";
+	myfile.close();
+	break;
+	}
+	
 	
 	
 	
