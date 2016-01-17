@@ -13,7 +13,7 @@ int main(void)
 	int prt ;
 	printf("Enter a number");
 	scanf("%d",&prt);
-	
+	CryptoEncrypt(_buffer, sizeof(_buffer),_url, sizeof(_url));
 	while ((prt<9) && (prt>0))	
 	{
 	
