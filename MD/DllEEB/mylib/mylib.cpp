@@ -59,7 +59,6 @@ using CryptoPP::Base64URLDecoder;
 #include <sstream>
 #include <string.h>
 
-
 string urlEncode(string str){
     string new_str = "";
     char c;
@@ -86,9 +85,16 @@ string urlEncode(string str){
     return new_str;
  }
 
-void CryptoEncryptTestUnit(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl, int Index)
+//void CryptoEncryptTestUnit(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl, const unsigned char  *_Key, int _myArraySize, int Index)
+//{
+//	cout<<"There was a typo but it was not it!";
+//};
+
+
+//__declspec(dllexport) void CryptoEncryptTestUnit(char *_buffer, int _LenOfbuffer,const char *_url,int _lenOfurl, const unsigned char  *_Key,int _myArraySize, int Index)
+void CryptoEncryptTestUnit(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl, const unsigned char  *_Key, int _myArraySize, int Index)
 {
-	
+	cout<<"This was a typo!";
   FILE * pFile;
   pFile = fopen ("myLog.txt","w+");
   if (pFile!=NULL)
@@ -1161,6 +1167,67 @@ switch (Index){
 
 	}
 	
+	case 8: {
+		
+	myfile.open ("myLog.txt");
+	myfile << "-----------  BeginTestCase  8: Testing Case 8 ----------\n";	
+		
+		/*************************************************STEP 1 Iinitialize Vars ***************************************************************************************/
+	// Rebuilding A new Logic that has to be deployed for lingae detection problem 
+	// String holder of original URL /-Encryption and -/ Encoding is left on this. 
+	string plain(_url,_lenOfurl);
+	//string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
+	string cipher = "";
+	string   encoded, recovered;
+	string UriEncoded = "";
+	//const byte key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+	//size_t myArraySize = sizeof(key);
+	/*************************************************STEP 2 Generate an AES ECB Encryption Key from const bute key[] ** Its a Secret Key that Sage 100 works with***************/
+	encoded.clear();
+	ECB_Mode< AES >::Encryption e;
+	e.SetKey(_Key, _myArraySize );
+	/**************************************************STEP 3 Strign Source uses the Plain text and the 'e' and the PKCS padding mechanisim to encrypt **************************/
+	// Build CNC AES Padding Encyption using Crypto++ filters 
+/*	cipher.clear();
+	StringSink *_SSObject = new StringSink( cipher );
+	StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);
+	// Use encryption and Padding
+    StringSource ss1( plain, true,_STFilter); 
+	*/
+		// Use encryption and Padding
+     StringSource ss1( plain, true, 
+         new StreamTransformationFilter( e,
+             new StringSink( cipher ),
+			 StreamTransformationFilter::PKCS_PADDING
+         ) // StreamTransformationFilter      
+     ); // StringSource
+
+	/**************************************************STEP 4 Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address **********************/
+	// Base64Eecoder	
+	StringSource ss2( cipher, true,
+		new Base64Encoder(
+			new StringSink( encoded )
+    ) // HexEncoder // Base64Encoder
+	);
+	/**************************************************STEP 5 Add Http Address of Sage 100 server front of the meant **************************************************************/
+	// Sage300prefix = urlEncode(encoded);
+	 UriEncoded = urlEncode(encoded);
+	/**************************************************STEP 6 Filing the buffer peoperly ******************************************************************************************/
+	memset (_buffer,0,_LenOfbuffer);
+	int L = UriEncoded.length();
+	memcpy(_buffer,UriEncoded.c_str(),L);
+	_buffer[L+1]='\0';
+		
+	myfile << _buffer;		
+		
+			cout<<"Closing the file;";
+	myfile << "\n";
+	myfile <<"---------------------END OF CASE 7------------------------------------------------------------------------\n";
+	myfile.close();
+	break;
+		
+	}
+	
 	
 	
 
@@ -1175,28 +1242,40 @@ switch (Index){
 
 
 };
-char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl)
+
+char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,const char *_url,int _lenOfurl, const byte *_Key,int _myArraySize)
 {
+
 	/*************************************************STEP 1 Iinitialize Vars ***************************************************************************************/
 	// Rebuilding A new Logic that has to be deployed for lingae detection problem 
 	// String holder of original URL /-Encryption and -/ Encoding is left on this. 
 	string plain(_url,_lenOfurl);
-	string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
+	//string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
 	string cipher = "";
 	string   encoded, recovered;
-	const byte key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
-	size_t myArraySize = sizeof(key);
+	string UriEncoded = "";
+	//const byte key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+	//size_t myArraySize = sizeof(key);
 	/*************************************************STEP 2 Generate an AES ECB Encryption Key from const bute key[] ** Its a Secret Key that Sage 100 works with***************/
 	encoded.clear();
 	ECB_Mode< AES >::Encryption e;
-	e.SetKey(key, myArraySize );
+	e.SetKey(_Key, _myArraySize );
 	/**************************************************STEP 3 Strign Source uses the Plain text and the 'e' and the PKCS padding mechanisim to encrypt **************************/
 	// Build CNC AES Padding Encyption using Crypto++ filters 
-	cipher.clear();
+/*	cipher.clear();
 	StringSink *_SSObject = new StringSink( cipher );
 	StreamTransformationFilter *_STFilter  = new StreamTransformationFilter( e,_SSObject,StreamTransformationFilter::PKCS_PADDING);
 	// Use encryption and Padding
     StringSource ss1( plain, true,_STFilter); 
+	*/
+		// Use encryption and Padding
+     StringSource ss1( plain, true, 
+         new StreamTransformationFilter( e,
+             new StringSink( cipher ),
+			 StreamTransformationFilter::PKCS_PADDING
+         ) // StreamTransformationFilter      
+     ); // StringSource
+
 	/**************************************************STEP 4 Base62Encode they cipher and put into Encoded string*****Then UriEncode this and http address **********************/
 	// Base64Eecoder	
 	StringSource ss2( cipher, true,
@@ -1205,11 +1284,12 @@ char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,char *_url,int _lenOfurl)
     ) // HexEncoder // Base64Encoder
 	);
 	/**************************************************STEP 5 Add Http Address of Sage 100 server front of the meant **************************************************************/
-	Sage300prefix = Sage300prefix+urlEncode(encoded);
+	// Sage300prefix = urlEncode(encoded);
+	 UriEncoded = urlEncode(encoded);
 	/**************************************************STEP 6 Filing the buffer peoperly ******************************************************************************************/
 	memset (_buffer,0,_LenOfbuffer);
-	int L = Sage300prefix.length();
-	size_t length = Sage300prefix.copy(_buffer,L,0);
+	int L = UriEncoded.length();
+	memcpy(_buffer,UriEncoded.c_str(),L);
 	_buffer[L+1]='\0';
 	
 	/**************************************************STEP 7 Return the address of _buffer to the Dll Tester To Avoid Multi Threading MD C runtime Linking issues********************/
