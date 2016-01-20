@@ -1250,7 +1250,7 @@ char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,const char *_url,int _lenO
 	// Rebuilding A new Logic that has to be deployed for lingae detection problem 
 	// String holder of original URL /-Encryption and -/ Encoding is left on this. 
 	string plain(_url,_lenOfurl);
-	//string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
+	string Sage300prefix = "https://pgmorww11v.paigroup.corp/DDP.Web/Home/Sage300/?key=";
 	string cipher = "";
 	string   encoded, recovered;
 	string UriEncoded = "";
@@ -1285,7 +1285,7 @@ char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,const char *_url,int _lenO
 	);
 	/**************************************************STEP 5 Add Http Address of Sage 100 server front of the meant **************************************************************/
 	// Sage300prefix = urlEncode(encoded);
-	 UriEncoded = urlEncode(encoded);
+	 UriEncoded = Sage300prefix+urlEncode(encoded);
 	/**************************************************STEP 6 Filing the buffer peoperly ******************************************************************************************/
 	memset (_buffer,0,_LenOfbuffer);
 	int L = UriEncoded.length();
@@ -1293,7 +1293,7 @@ char  * CryptoEncrypt(char *_buffer, int _LenOfbuffer,const char *_url,int _lenO
 	_buffer[L+1]='\0';
 	
 	/**************************************************STEP 7 Return the address of _buffer to the Dll Tester To Avoid Multi Threading MD C runtime Linking issues********************/
-	return (_buffer);
+	return (_buffer)
 	
 	
 	
