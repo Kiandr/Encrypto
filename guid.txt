@@ -1,0 +1,14 @@
+rem make file
+rem cl /CRYPTODLL prddfunCrypto.cpp /LD
+rem cl main.c /link prddfunCrypto.lib
+rem cl /LD prddfunCrypto.cpp /link /prddfunCrypto.obj
+
+rem cl main.c /link prddfunCrypto.lib
+
+rem cl /MD main.c  /link  "C:\DD\pr\base\cryptopp-lib\libs\cryptlib.lib" 
+
+cl /LD  mylib.c 
+
+rem cl /LD mylib.c /link /DEF:mylib.def
+
+rem cl main.c /link mylib.lib

@@ -1,0 +1,1 @@
+  cl -c /Od -I. -IC:\DD\pr\base\..\..\PR\BASE\UP32\INCLUDE -IC:\DD\pr\base\..\..\PR\BASE\UP32\GEN -IC:\DD\pr\base\..\..\PR\BASE\UP32\OBJ /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "MYLIB_EXPORTS" /D "_WINDLL" /FD /EHsc /RTC1 /MDd   /W3  /c /ZI /TP /errorReport:prompt prddfun-crypto.cpp

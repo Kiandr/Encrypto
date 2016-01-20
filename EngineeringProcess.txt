@@ -1,0 +1,1 @@
+This document wirll describe the track path, for build. complie, link and deployment of the prddfun-crypto.h, prddfun.cpp. prddcrypto.sln 
