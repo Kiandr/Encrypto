@@ -41,12 +41,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories=""
+				AdditionalUsingDirectories="$(NOINHERIT)"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
+				SuppressStartupBanner="false"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -60,6 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="C:\DD\pr\base\cryptopp-lib\libs\cryptlib.lib $(NOINHERIT)"
 			/>
 			<Tool
 				Name="VCALinkTool"

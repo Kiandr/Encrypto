@@ -1,6 +1,6 @@
 // ECB.cpp : Defines the exported functions for the DLL application.
 //
-# _USE_CRT_SECURE_NO_WARNINGS
+//# _USE_CRT_SECURE_NO_WARNINGS
 #include "stdafx.h"
 
 #include "mylib.h"
