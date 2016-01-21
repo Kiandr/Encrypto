@@ -23,7 +23,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 //# _USE_CRT_SECURE_NO_WARNINGS
 //#include "stdafx.h"
 
-#include "mylib.h"
+#include "prddfun-cryptoDll.h"
 #include <fstream>
 using namespace std;
 

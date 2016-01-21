@@ -1,7 +1,7 @@
 /* No need to include this if you went the module definition
  * route, but you will need to add the function prototype.
  */
-#include "mylib.h"
+#include "prddfun-cryptoDll.h "
 #include "stdio.h"
 int main(void)
 {
