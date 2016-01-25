@@ -137,6 +137,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(PROJPATH)\cryptopp-lib\libs\cryptlib.lib"
+				OutputFile="$(OutDir)\$(APP)ddfun-cryptoDll.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
