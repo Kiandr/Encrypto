@@ -44,12 +44,9 @@ $(OBJPATH)\prddfun1.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
 $(OBJPATH)\prddfungenxml.obj: prddfun1.cpp iPR iPRDDFUN prddfun1.h prddfun2.h
 
 $(OBJPATH)\$(APP)ddfun-cryptoDll.lib:  prddfun-cryptoDll.cpp  prddfun-cryptoDll.h
-   devenv "$(PROJPATH)\Source\Views\prddfun-cryptoDll.sln" /Deploy "Release|Win32" /out  "$(PROJPATH)\Source\Views\logSln.txt" /project  "prddfun-cryptoDll" /projectconfig Release /Log "$(PROJPATH)\Source\Views\logVcProj.txt"
-
- 
- 
-# devenv C:\DD\pr\base\Source\Views\prddfun-cryptoDll.sln /Deploy "Release|Win32" /out "C:\DD\pr\base\Source\Views\logSln.txt" /project C:\DD\pr\base\Source\Views\prddfun-cryptoDll.vcproj /projectconfig Release /Log "C:\DD\pr\base\Source\Views\logVcProj.txt"
-
+    devenv "$(PROJPATH)\Source\Views\prddfun-cryptoDll.sln" /Deploy "Release|Win32" /out  "$(PROJPATH)\Source\Views\logSln.txt" /project  "prddfun-cryptoDll" /projectconfig Release /Log "$(PROJPATH)\Source\Views\logVcProj.txt"
+	copy Release\$(APP)ddfun-cryptoDll.lib $(OBJPATH)
+	copy Release\$(APP)ddfun-cryptoDll.dll $(RUNPATH)
 
 # If there is a prddfun2 table add table generation dependencies here based
 # on the .tbl files
