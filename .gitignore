@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+/MD/Jan21st/SlnBuilder/crypto/Debug
+/MD/Jan21st/SlnBuilder/crypto/Release
+/MD/Jan21st/SlnBuilder/crypto/*.ncb
+/MD/Jan21st/SlnBuilder/crypto/*.user
+/MD/Jan21st/SlnBuilder/crypto/*.ncb
