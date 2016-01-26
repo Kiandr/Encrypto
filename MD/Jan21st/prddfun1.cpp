@@ -832,8 +832,7 @@ VIEWBASE GetEtc (
     CHAR sState [SIZEOF_COMP_STATE+1];
     CHAR sPostCode [SIZEOF_COMP_POSTCODE+1];
     const unsigned char  key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
-    char _buffer[500];
-   // Tools for Data Parser
+    // Tools for Data Parser
    time_t now = time(0);
    tm *lt = gmtime(&now);
    CHAR sDate[50];
@@ -851,10 +850,6 @@ VIEWBASE GetEtc (
     PARAM_GET_STRING (lpv, PROPTS, TAXNUMBER, sFein);
     strRTrim(sFein);
 
-    // Building url
-    //_url = buildUrlB42008( lpv->CompanyInfo, &_EmployeeCount,buffer);
-    buildUrl(" ");
-
     strCopyZB(sOrgID, lpv->CompanyInfo.sOrgID, SIZEOF_ORGID);
     strCopyZB(sName, lpv->CompanyInfo.sName, SIZEOF_COMP_NAME);
     strCopyZB(sAddress1, lpv->CompanyInfo.sAddress1, SIZEOF_COMP_ADDRESS);
@@ -863,14 +858,11 @@ VIEWBASE GetEtc (
     strCopyZB(sState, lpv->CompanyInfo.sState, SIZEOF_COMP_STATE);
     strCopyZB(sPostCode, lpv->CompanyInfo.sPostCode, SIZEOF_COMP_POSTCODE);
 
-      // current date/time based on current system
+    // current date/time based on current system 
     sprintf_s(sDate,sizeof(sDate), "%4.4d-%2.2d-%2.2dT%2.2d:%2.2d:%2.2d.000Z", (1900 + lt->tm_year), lt->tm_mon+1, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec,lt->tm_sec);
     sprintf_s(_url, sizeof(_url),"businessPartnerId=%s;sourceCompanyCode=%s;sourceProduct=Sage300;fein=%s;ts=%s;ec=%ld;companyName=%s;address1=%s;address2=%s;city=%s;state=%s;zip=%s;",
           lpv->sClientID, sOrgID, sFein, sDate, lCount, sName, sAddress1, sAddress2, sCity, sState, sPostCode);
-    // send url to test
-    // initate a new char as long as the returned object
-    // strcpy the returned item into the initated object
-    // Filling url buffer with initiated object
+    // Encrypt the url 
     CryptoEncrypt(lpr->url, sizeof(lpr->url), lpv->stemURLapply, _url, key, sizeof(key));
     break;
 
