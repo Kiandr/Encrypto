@@ -1,9 +1,4 @@
 // prddfun-cryptoDll.cpp : Defines the exported functions for the DLL application.
-//
-
-#include "stdafx.h"
-
-
 /*--------------------------------------------------------------------
 
     File        :   prddfun-cryptoDll.cpp
@@ -17,7 +12,7 @@
 // Defines the entry point for the DLL application.
 // This can be removed once we are able to link this directly into view
 #include "WINDOWS.h"
-/*
+
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -33,7 +28,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	}
 	return TRUE;
 }
-*/
+
 #include "prddfun-cryptoDll.h"
 
 #include <fstream>
