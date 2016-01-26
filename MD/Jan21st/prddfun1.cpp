@@ -831,8 +831,8 @@ VIEWBASE GetEtc (
     CHAR sCity [SIZEOF_COMP_CITY+1];
     CHAR sState [SIZEOF_COMP_STATE+1];
     CHAR sPostCode [SIZEOF_COMP_POSTCODE+1];
-	const unsigned char  key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
-	char _buffer[500];
+    const unsigned char  key[] = {35,101,45,114,65,119,114,117,55,33,63,95,65,99,114,117,109,53,103,95,115,87,101,80,54,103,69,74,85,53,56,0};
+    char _buffer[500];
    // Tools for Data Parser
    time_t now = time(0);
    tm *lt = gmtime(&now);
@@ -853,7 +853,7 @@ VIEWBASE GetEtc (
 
     // Building url
     //_url = buildUrlB42008( lpv->CompanyInfo, &_EmployeeCount,buffer);
-	buildUrl(" ");
+    buildUrl(" ");
 
     strCopyZB(sOrgID, lpv->CompanyInfo.sOrgID, SIZEOF_ORGID);
     strCopyZB(sName, lpv->CompanyInfo.sName, SIZEOF_COMP_NAME);
@@ -871,7 +871,7 @@ VIEWBASE GetEtc (
     // initate a new char as long as the returned object
     // strcpy the returned item into the initated object
     // Filling url buffer with initiated object
-   CryptoEncrypt(lpr->url, sizeof(lpr->url),_url,strlen(_url),  key, sizeof(key));
+    CryptoEncrypt(lpr->url, sizeof(lpr->url), lpv->stemURLapply, _url, key, sizeof(key));
     break;
 
   default:
@@ -1119,9 +1119,9 @@ VIEWBASE ProcessEtc (
 
 {
    ERRNUM e = ERRNUM_SUCCESS;
-   
+
    CHECK_CALL (e, GenerateDirectDeposit (lpv));
-   
+
    return e;
 }
 #endif
